@@ -33,8 +33,8 @@ var ShoppingCart = function () {
   }
   var cartTotal = function () {
     var total = 0
-    for (i in cart) {
-      let price = cart[i].price;
+    for (let item of cart) {
+      let price = item.price;
       total += price
     }
     $('.total').html(total)
@@ -69,7 +69,7 @@ $('.view-cart').on('click', function () {
 
 $('.add-to-cart').on('click', function () {
   // TODO: get the "item" object from the page
-  var $item = $(this).closest('.item')
+  const $item = $(this).closest('.item')
   app.addItem($item);
   app.updateCart();
   app.cartTotal();
