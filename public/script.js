@@ -68,7 +68,7 @@ var ShoppingCart = function () {
     itemId = item.data().id;
     for (let i in cart) {
       if (itemId === cart[i].id) {
-        cart.splice(cart.indexOf(cart[i]))
+        cart.splice(cart.indexOf(cart[i]),1)
       }
     }
   }
