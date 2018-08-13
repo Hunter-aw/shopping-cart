@@ -22,9 +22,11 @@ var ShoppingCart = function () {
   var addItem = function (item) {
     var price = item.data().price;
     var name = item.data().name;
+    var id = item.data().id;
     let newItem = {
       name: name,
-      price: price
+      price: price,
+      id: id
     }
     cart.push(newItem);
     
@@ -46,12 +48,22 @@ var ShoppingCart = function () {
     cart.length = 0;
     // TODO: Write a function that clears the cart ;-)
   }
+
+  var removeItem = function (item) {
+    itemId = item.data().id;
+    for (let i in cart) {
+      if (itemId === cart[i].id) {
+        cart.splice(cart.indexOf(cart[i]))
+      }
+    }
+  }
   
   return {
     updateCart: updateCart,
     addItem: addItem,
     clearCart: clearCart,
-    cartTotal: cartTotal
+    cartTotal: cartTotal,
+    removeItem: removeItem
   }
 };
 
@@ -71,12 +83,19 @@ $('.add-to-cart').on('click', function () {
   // TODO: get the "item" object from the page
   const $item = $(this).closest('.item')
   app.addItem($item);
-  app.updateCart();
+  app.updateCart()
   app.cartTotal();
 });
 
 $('.clear-cart').on('click', function () {
   app.clearCart();
+  app.updateCart();
+  app.cartTotal();
+});
+
+$('.cart-list').on('click', '.removeItem', function() {
+  const $item = $(this).closest('.cart-item')
+  app.removeItem($item);
   app.updateCart();
   app.cartTotal();
 });
