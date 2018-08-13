@@ -153,7 +153,11 @@
   <script id="cart-template" type="text/x-handlebars-template">
     <ul class = "item-list">
       {{#each cartItems}}
-      <li class= "cart-item" data-id={{id}}>{{name}}: ${{price}} <button class= "removeItem">Remove</button></li>
+      <li class= "cart-item" data-id={{id}} data-count={{idCount}}>{{name}}: ${{price}} 
+        {{#if idCount}} 
+          ({{idCount}}) 
+        {{/if}}
+        <button class= "removeItem">Remove</button></li>
       {{/each}}
     </ul>
   </script>

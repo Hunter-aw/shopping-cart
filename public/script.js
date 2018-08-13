@@ -26,18 +26,33 @@ var ShoppingCart = function () {
     let newItem = {
       name: name,
       price: price,
-      id: id
+      id: id,
+      idCount: 1
     }
-    cart.push(newItem);
-    
-    // TODO: Write this function. Remember this function has nothing to do with display. 
-    // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
+    if (cart.length > 0) {
+      for (let something of cart) {
+        if (newItem.id === something.id){
+          something.idCount ++;
+          return;
+        }
+      } cart.push(newItem)
+        return;
+    } else {
+      cart.push(newItem);
+    } 
   }
+
   var cartTotal = function () {
-    var total = 0
+    let total = 0
+    let price = 0
     for (let item of cart) {
-      let price = item.price;
-      total += price
+      if(item.idCount > 1){
+        price = item.idCount * item.price
+        total += price
+      } else {
+        price = item.price;
+        total += price
+      }
     }
     $('.total').html(total)
   }
